@@ -1,9 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <script type="module" src="common.mjs"></script>
-        <script type="module" src="web.mjs"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Day Calendar</title>
+        <style>
+            body {
+                font-family: system-ui, Arial, sans-serif;
+                padding: 20px;
+                background: #fafafa;
+            }
+            
+            h1 {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            /* Grid for weekdays and calendar days */
+            
+            .calendar {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);gap: 5px;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            
+            .day-box {
+                border: 1px solid #ccc;
+                background: #fff;
+                padding: 10px;
+                min-height: 80px;
+                text-align: right;
+                font-size: 14px;
+            }
+            
+            .weekdays {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);max-width: 700px;
+                margin: 0 auto 5px auto;
+                text-align: center;
+                font-weight: bold;
+                background: #eee;
+                padding: 5px 0;
+            }
+        </style>
+       
     </head>
+
     <body>
+
+        <h1 id="monthYear"></h1>
+
+        
+        <!-- Weekday header -->
+         <div class="weekdays">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
+        </div>
+        
+        <!-- Calendar grid container -->
+         <div id="calendar" class="calendar"></div>
+
+         <!-- Import JS modules -->
+    <script type="module" src="./common.mjs"></script>
+    <script type="module" src="./web.mjs"></script>
+
     </body>
 </html>
