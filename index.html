@@ -17,17 +17,19 @@
       }
 
       /* Style for dropdown controls */
+
       .controls {
         text-align: center;
         margin-bottom: 15px;
       }
 
-      .controls select,
-      .controls button {
-        padding: 5px 10px;
+      .controls select {
+        padding: 5px;
         font-size: 14px;
         margin: 0 5px;
       }
+
+      /* Grid for weekdays and calendar days */
 
       .calendar {
         display: grid;
@@ -62,6 +64,7 @@
   <body>
     <h1 id="monthYear"></h1>
 
+    <!-- Weekday header -->
     <div class="weekdays">
       <div>Mon</div>
       <div>Tue</div>
@@ -72,8 +75,10 @@
       <div>Sun</div>
     </div>
 
+    <!-- Calendar grid container -->
     <div id="calendar" class="calendar"></div>
 
+    <!-- Import JS modules -->
     <script type="module" src="./common.mjs"></script>
     <script type="module" src="./web.mjs"></script>
   </body>
