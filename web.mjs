@@ -49,12 +49,40 @@ window.onload = function() {
   controlsDiv.appendChild(yearSelect);
   controlsDiv.appendChild(nextBtn);
 
+// Get nth weekday of month
+  function getNthWeekdayOfMonth(year, month, weekdayName, occurrence) {
+    const weekdayNames = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+    const weekday = weekdayNames.indexOf(weekdayName);
+
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const days = [];
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const day = new Date(year, month - 1, d);
+      const jsWeekday = (day.getDay() + 6) % 7; // Monday=0
+      if (jsWeekday === weekday) days.push(d);
+    }
+
+    switch (occurrence.toLowerCase()) {
+      case "first": return days[0];
+      case "second": return days[1];
+      case "third": return days[2];
+      case "fourth": return days[3];
+      case "last": return days[days.length - 1];
+      default: return null;
+    }
+  }
+
+
   // --- Calendar rendering function ---
   function renderCalendar(year, month) {
     calendar.innerHTML = '';
     monthYear.textContent = `${monthNames[month - 1]} ${year}`;
 
     const weeks = generateCalendarMatrix(year, month);
+
+    // Filter events for this month
+    const eventsThisMonth = daysData.filter(e => e.monthName === monthNames[month - 1]);
 
     for (const week of weeks) {
       for (const dayInfo of week) {
@@ -67,6 +95,20 @@ window.onload = function() {
         }
 
         div.textContent = dayInfo.day;
+
+        // Add events if any
+        eventsThisMonth.forEach(event => {
+          const eventDay = getNthWeekdayOfMonth(year, month, event.dayName, event.occurence);
+          if (eventDay === dayInfo.day && dayInfo.monthOffset === 0) {
+            const span = document.createElement('span');
+            span.style.display = "block";
+            span.style.fontSize = "12px";
+            span.style.color = "blue";
+            span.textContent = event.name;
+            div.appendChild(span);
+          }
+        });
+
         calendar.appendChild(div);
       }
     }
