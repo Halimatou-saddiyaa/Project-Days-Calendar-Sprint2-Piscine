@@ -16,39 +16,8 @@ window.onload = function() {
   const controlsDiv = document.createElement("div");
   controlsDiv.className = "controls";
 
-// Create month/year selectors 
-const controlsDiv = document.createElement("div");
-  controlsDiv.className = "controls";
-
-  const monthSelect = document.createElement("select");
-  const yearSelect = document.createElement("select");
-
-  // Fill month options
-  monthNames.forEach((name, i) => {
-    const opt = document.createElement("option");
-    opt.value = i + 1; // months are 1–12
-    opt.textContent = name;
-    monthSelect.appendChild(opt);
-  });
-
-  // Fill year options (range 1900-2100)
-  const currentYear = new Date().getFullYear();
-  for (let y = currentYear - 125; y <= currentYear + 75; y++) {
-    const opt = document.createElement("option");
-    opt.value = y;
-    opt.textContent = y;
-    yearSelect.appendChild(opt);
-  }
-
-  // Add to page 
-  monthYear.insertAdjacentElement("beforebegin", controlsDiv);
-  controlsDiv.appendChild(monthSelect);
-  controlsDiv.appendChild(yearSelect);
-
-// Render a month view
-function renderCalendar(year, month) {
-  // Clear old content
-  calendar.innerHTML = '';
+  const prevBtn = document.createElement("button");
+  prevBtn.textContent = "<< Prev";
 
   const nextBtn = document.createElement("button");
   nextBtn.textContent = "Next >>";
@@ -103,30 +72,20 @@ function renderCalendar(year, month) {
     }
   }
 
-// === On page load, show current month ===
-const today = new Date();
-let year = today.getFullYear();
-let month = today.getMonth() + 1;
-monthSelect.value = month;
-yearSelect.value = year;
-renderCalendar(year, month);
+  // --- Initialize with current date ---
+  const today = new Date();
+  let year = today.getFullYear();
+  let month = today.getMonth() + 1;
+  monthSelect.value = month;
+  yearSelect.value = year;
+  renderCalendar(year, month);
 
-// Auto-update when dropdown changes
-
-monthSelect.addEventListener("change", () => {
+  // --- Dropdown change events ---
+  monthSelect.addEventListener("change", () => {
     month = parseInt(monthSelect.value);
     year = parseInt(yearSelect.value);
     renderCalendar(year, month);
   });
-
-  yearSelect.addEventListener("change", () => {
-    month = parseInt(monthSelect.value);
-    year = parseInt(yearSelect.value);
-    renderCalendar(year, month);
-  });
-};
-
-
 
   yearSelect.addEventListener("change", () => {
     month = parseInt(monthSelect.value);
