@@ -17,10 +17,10 @@ window.onload = function() {
   controlsDiv.className = "controls";
 
   const prevBtn = document.createElement("button");
-  prevBtn.textContent = "<< Prev";
+  prevBtn.textContent = "◀ Prev";
 
   const nextBtn = document.createElement("button");
-  nextBtn.textContent = "Next >>";
+  nextBtn.textContent = "Next ▶";
 
   const monthSelect = document.createElement("select");
   const yearSelect = document.createElement("select");
