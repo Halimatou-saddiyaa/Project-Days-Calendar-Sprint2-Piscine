@@ -3,7 +3,7 @@ import daysData from "../days.json" with { type: "json" };
 
 window.onload = function() {
 
-  // Get DOM elements
+  // --- Get DOM elements ---
   const calendar = document.getElementById('calendar');
   const monthYear = document.getElementById('monthYear');
 
@@ -25,6 +25,19 @@ window.onload = function() {
   const monthSelect = document.createElement("select");
   const yearSelect = document.createElement("select");
 
+  // Accessibility labels 
+  const monthLabel = document.createElement("label");
+  monthLabel.textContent = "Month: ";
+  monthLabel.setAttribute("for", "monthSelect");
+
+  const yearLabel = document.createElement("label");
+  yearLabel.textContent = "Year: ";
+  yearLabel.setAttribute("for", "yearSelect");
+
+  // Add IDs to link labels and selects
+  monthSelect.id = "monthSelect";
+  yearSelect.id = "yearSelect";
+
   // Fill month options
   monthNames.forEach((name, i) => {
     const opt = document.createElement("option");
@@ -45,13 +58,13 @@ window.onload = function() {
   // Add to page
   monthYear.insertAdjacentElement("beforebegin", controlsDiv);
   controlsDiv.appendChild(prevBtn);
+  controlsDiv.appendChild(monthLabel);
   controlsDiv.appendChild(monthSelect);
+  controlsDiv.appendChild(yearLabel);
   controlsDiv.appendChild(yearSelect);
   controlsDiv.appendChild(nextBtn);
 
-  
-
-// Get nth weekday of month
+// --- Get nth weekday of month ---
   function getNthWeekdayOfMonth(year, month, weekdayName, occurrence) {
     const weekdayNames = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
     const weekday = weekdayNames.indexOf(weekdayName);
@@ -75,7 +88,6 @@ window.onload = function() {
     }
   }
 
-
   // --- Calendar rendering function ---
   function renderCalendar(year, month) {
     calendar.innerHTML = '';
@@ -93,7 +105,7 @@ window.onload = function() {
 
         if (dayInfo.monthOffset !== 0) {
           div.style.background = '#f2f2f2';
-          div.style.color = '#999';
+          div.style.color = '#555';
         }
 
         div.textContent = dayInfo.day;
@@ -116,7 +128,7 @@ window.onload = function() {
     }
   }
 
-  // --- Initialize with current date ---
+  // --- Initialise with current date ---
   const today = new Date();
   let year = today.getFullYear();
   let month = today.getMonth() + 1;
@@ -137,7 +149,7 @@ window.onload = function() {
     renderCalendar(year, month);
   });
 
-  // --- Previous/Next button logic ---
+  // Previous/Next button logic
   prevBtn.addEventListener("click", () => {
     month--;
     if (month < 1) {
