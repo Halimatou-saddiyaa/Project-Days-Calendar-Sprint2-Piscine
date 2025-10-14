@@ -17,10 +17,10 @@ window.onload = function() {
   controlsDiv.className = "controls";
 
   const prevBtn = document.createElement("button");
-  prevBtn.textContent = "<< Prev";
+  prevBtn.textContent = "◀ Prev";
 
   const nextBtn = document.createElement("button");
-  nextBtn.textContent = "Next >>";
+  nextBtn.textContent = "Next ▶";
 
   const monthSelect = document.createElement("select");
   const yearSelect = document.createElement("select");
@@ -35,7 +35,7 @@ window.onload = function() {
 
   // Fill year options
   const currentYear = new Date().getFullYear();
-  for (let y = currentYear - 125; y <= currentYear + 50; y++) {
+  for (let y = currentYear - 125; y <= currentYear + 80; y++) {
     const opt = document.createElement("option");
     opt.value = y;
     opt.textContent = y;
@@ -48,6 +48,8 @@ window.onload = function() {
   controlsDiv.appendChild(monthSelect);
   controlsDiv.appendChild(yearSelect);
   controlsDiv.appendChild(nextBtn);
+
+  
 
 // Get nth weekday of month
   function getNthWeekdayOfMonth(year, month, weekdayName, occurrence) {
