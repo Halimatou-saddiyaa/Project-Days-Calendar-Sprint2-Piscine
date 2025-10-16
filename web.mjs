@@ -1,4 +1,4 @@
-import { generateCalendarMatrix } from "./common.mjs";
+import { generateCalendarMatrix, getNthWeekdayOfMonth } from "./common.mjs";
 import daysData from "../days.json" with { type: "json" };
 
 window.onload = function() {
@@ -63,30 +63,6 @@ window.onload = function() {
   controlsDiv.appendChild(yearLabel);
   controlsDiv.appendChild(yearSelect);
   controlsDiv.appendChild(nextBtn);
-
-// --- Get nth weekday of month ---
-  function getNthWeekdayOfMonth(year, month, weekdayName, occurrence) {
-    const weekdayNames = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-    const weekday = weekdayNames.indexOf(weekdayName);
-
-    const daysInMonth = new Date(year, month, 0).getDate();
-    const days = [];
-
-    for (let d = 1; d <= daysInMonth; d++) {
-      const day = new Date(year, month - 1, d);
-      const jsWeekday = (day.getDay() + 6) % 7; // Monday=0
-      if (jsWeekday === weekday) days.push(d);
-    }
-
-    switch (occurrence.toLowerCase()) {
-      case "first": return days[0];
-      case "second": return days[1];
-      case "third": return days[2];
-      case "fourth": return days[3];
-      case "last": return days[days.length - 1];
-      default: return null;
-    }
-  }
 
   // --- Calendar rendering function ---
   function renderCalendar(year, month) {
