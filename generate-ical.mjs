@@ -3,31 +3,7 @@
 
 import fs from "fs";
 import daysData from "./days.json" with { type: "json" };
-
-// --- Helper: Get nth weekday of a given month ---
-function getNthWeekdayOfMonth(year, month, weekdayName, occurrence) {
-  const weekdayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  const weekday = weekdayNames.indexOf(weekdayName);
-  if (weekday === -1) throw new Error(`Invalid weekday name: ${weekdayName}`);
-
-  const daysInMonth = new Date(year, month, 0).getDate();
-  const days = [];
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    const date = new Date(year, month - 1, d);
-    const jsWeekday = (date.getDay() + 6) % 7; // Monday=0
-    if (jsWeekday === weekday) days.push(d);
-  }
-
-  switch (occurrence?.toLowerCase()) {
-    case "first": return days[0];
-    case "second": return days[1];
-    case "third": return days[2];
-    case "fourth": return days[3];
-    case "last": return days[days.length - 1];
-    default: return null;
-  }
-}
+import { getNthWeekdayOfMonth } from "./common.mjs";
 
 // --- Helper: convert Date to YYYYMMDD ---
 function formatDateYYYYMMDD(date) {
